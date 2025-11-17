@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-6">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+      {% else %}
+        <img src="{% static 'images/placeholder.png' %}" class="img-fluid" alt="placeholder">
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p>₹{{ product.price }}</p>
+      <p>{{ product.description|linebreaks }}</p>
+      <form action="{% url 'cart:add_to_cart' product.id %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-25">
+        </div>
+        <button class="btn btn-success">Add to Cart</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
