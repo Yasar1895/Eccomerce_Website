@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% block content %}
+  <h2>Order #{{ order.id }} placed successfully</h2>
+  <p>Status: {{ order.status }}</p>
+  <h4>Items</h4>
+  <ul>
+    {% for item in order.items.all %}
+      <li>{{ item.product_name }} × {{ item.quantity }} — ₹{{ item.price }}</li>
+    {% endfor %}
+  </ul>
+  <a class="btn btn-primary" href="{% url 'core:home' %}">Continue Shopping</a>
+{% endblock %}
