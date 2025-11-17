@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block content %}
+  <h2>Checkout</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label>Name</label>
+      <input class="form-control" name="name" value="{{ request.user.get_full_name }}">
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input class="form-control" name="email" value="{{ request.user.email }}">
+    </div>
+    <div class="mb-3">
+      <label>Address</label>
+      <textarea class="form-control" name="address" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <label>Phone</label>
+      <input class="form-control" name="phone">
+    </div>
+    <h4>Order Total: ₹{{ cart.get_total_price }}</h4>
+    <button class="btn btn-success" type="submit">Place Order (Demo: Mark Paid)</button>
+  </form>
+{% endblock %}
